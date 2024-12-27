@@ -4,6 +4,7 @@ import laura from './assets/lauraStyles.png'
 import rosenburg from './assets/rosenburg.png'
 import djkast from './assets/djkast.png'
 import shani from './assets/shani.png'
+import PersonCard from './components/PersonCard';
 
 function App() {
 
@@ -18,40 +19,17 @@ function App() {
 
       <div className="lastWinner">
         <h2>Last Winner</h2>
-        <div className="personCard">
-            <img src={ebro} alt="Ebro" height={200} />
-            <h2>Ebro Darden</h2>
-          </div>
+        <PersonCard image={ebro} alt={"Ebro"} name={'Ebro Darden'} />
       </div>
 
       <div className='scoreBoardContainer'>
         <h1>Scoreboard</h1>
         <div className="scoreBoard">
-          <div className="personCard">
-            <img src={ebro} alt="Ebro" height={200} />
-            <h2>Ebro Darden</h2>
-            <h3>0</h3>
-          </div>
-          <div className="personCard">
-            <img src={rosenburg} alt="Peter Rosenburg" height={200}/>
-            <h2>Peter Rosenberg</h2>
-            <h3>0</h3>
-          </div>
-          <div className="personCard">
-            <img src={laura} alt="Laura Styles" height={200}/>
-            <h2>Laura Styles</h2>
-            <h3>0</h3>
-          </div>
-          <div className="personCard">
-            <img src={shani} alt="Shani Kulture" />
-            <h2>Shani Kulture</h2>
-            <h3>0</h3>
-          </div>
-          <div className="personCard">
-            <img src={djkast} alt="DJ Kast One" height={200} />
-            <h2>DJ Kast One</h2>
-            <h3>0</h3>
-          </div>
+          <PersonCard image={ebro} alt={"Ebro"} name={'Ebro Darden'} score={0}/>
+          <PersonCard image={rosenburg} alt={"Peter Rosenburg"} name={'Peter Rosenburg'} score={0}/>
+          <PersonCard image={laura} alt={"Laura Styles"} name={'Laura Styles'} score={0}/>
+          <PersonCard image={shani} alt={"Shani Kulture"} name={'Shani Kulture'} score={0}/>
+          <PersonCard image={djkast} alt={"DJ Kast One"} name={'DJ Kast One'} score={0}/>
         </div>
       </div>
       <div>
