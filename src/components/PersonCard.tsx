@@ -1,4 +1,8 @@
 import { Player } from "../types";
+import ebro from './assets/ebro.png'
+import laura from './assets/lauraStyles.png'
+import djkast from './assets/djkast.png'
+import shani from './assets/shani.png'
 
 interface Props {
   player: Player;
@@ -10,25 +14,25 @@ const playerToData = (player: Player) => {
   
     case 'ebro':
       return {
-        image: 'src/assets/ebro.png',
+        image: ebro,
         alt: 'Ebro',
         name: 'Ebro Darden'
       };
     case 'laura':
       return {
-        image: 'src/assets/lauraStyles.png',
+        image: laura,
         alt: 'Laura Styles',
         name: 'Laura Styles'
       };
     case 'shani':
       return {
-        image: 'src/assets/shani.png',
+        image: shani,
         alt: 'Shani Kulture',
         name: 'Shani Kulture'
       };
     case 'djkast':
       return {
-        image: 'src/assets/djkast.png',
+        image: djkast,
         alt: 'DJ Kast One',
         name: 'DJ Kast One'
       };
