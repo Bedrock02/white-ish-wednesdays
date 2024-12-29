@@ -4,14 +4,26 @@ import { useEffect, useState } from 'react';
 import sample from './data/games';
 import { GameSummary, Player } from './types';
 import { populateMissingScores } from './data/people';
-
-
+import { getGameData } from './data/neon';
 
 const  App = () => {
-  const [data, ] = useState<GameSummary | undefined>(sample);
+  const [data, setData] = useState<GameSummary | undefined>(sample);
   const [lastWinner, setLastWinner] = useState<Player | undefined>(undefined);
   const [sortedScores, setSortedScores] = useState<[string, number][]>([]);
   
+  const fetchData = async () => {
+    const result = await getGameData();
+    setData({
+      lastWinner: result.lastWinner.name,
+      scores: result.scores,
+      last_date_modified: result.lastWinner.date_created
+    })
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
 
   useEffect(() => {
     if (data === undefined) {

@@ -6,5 +6,6 @@ export interface GameSummary {
   "scores": {
     [key in Player]?: number
   },
-  "last_date_modified": "2021-09-01T00:00:00.000Z"
+  "last_date_modified": string
 }
+

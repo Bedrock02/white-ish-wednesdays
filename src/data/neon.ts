@@ -1,32 +1,33 @@
-// Next.js example
-import postgres from 'postgres';
-import { Player } from '../types';
-const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
-const conn = postgres({
-  host: PGHOST,
-  database: PGDATABASE,
-  username: PGUSER,
-  password: PGPASSWORD,
-  port: 5432,
-  ssl: 'require',
-});
+import { neon } from "@neondatabase/serverless";
 
-const getScores = async () => {
-  const scores = await conn`
-    SELECT Name, COUNT(*) AS records
+const { DATABASE_URL } = process.env;
+
+const sql = neon(DATABASE_URL as string);
+
+const getGameData = async () => {
+  const scores = await sql`
+    SELECT Name, COUNT(*) AS score
     FROM Games
     GROUP BY Name
   `;
-  const lastGame = await conn`
+  const lastGame = await sql`
     SELECT * 
     FROM Games
     ORDER BY date_created DESC
     LIMIT 1;
   `;
-  const lastWinner = lastGame[0].Name;
-  return { scores, lastWinner };
+  const lastWinner = lastGame[0];
+  const latestScores: Record<string, number> = {};
+  scores.forEach(game => {
+        if (game.name === undefined) {
+          return;
+        }
+        latestScores[game.name] = game.score;
+      });
+  
+  return { scores: latestScores, lastWinner };
 };
 
 export {
-  getScores
+  getGameData
 }
