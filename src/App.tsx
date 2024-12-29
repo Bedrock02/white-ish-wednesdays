@@ -1,8 +1,4 @@
 import './App.css'
-import ebro from './assets/ebro.png'
-import laura from './assets/lauraStyles.png'
-import djkast from './assets/djkast.png'
-import shani from './assets/shani.png'
 import PersonCard from './components/PersonCard';
 import { useEffect, useState } from 'react';
 import sample from './data/games';
@@ -11,7 +7,7 @@ import { GameSummary, Player } from './types';
 
 
 const  App = () => {
-  const [data, setData] = useState<GameSummary | undefined>(sample);
+  const [data, ] = useState<GameSummary | undefined>(sample);
   const [lastWinner, setLastWinner] = useState<Player | undefined>(undefined);
   const [sortedScores, setSortedScores] = useState<[string, number][]>([]);
   
