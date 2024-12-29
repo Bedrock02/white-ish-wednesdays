@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "buildData": "npx tsx src/scripts/buildData.ts"
+    "buildData": "npx tsx buildData.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.10.4",
