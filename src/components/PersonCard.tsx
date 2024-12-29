@@ -1,8 +1,8 @@
 import { Player } from "../types";
-import ebro from './assets/ebro.png'
-import laura from './assets/lauraStyles.png'
-import djkast from './assets/djkast.png'
-import shani from './assets/shani.png'
+import ebro from '../assets/ebro.png'
+import laura from '../assets/lauraStyles.png'
+import djkast from '../assets/djkast.png'
+import shani from '../assets/shani.png'
 
 interface Props {
   player: Player;
