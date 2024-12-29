@@ -3,6 +3,7 @@ import PersonCard from './components/PersonCard';
 import { useEffect, useState } from 'react';
 import sample from './data/games';
 import { GameSummary, Player } from './types';
+import { populateMissingScores } from './data/people';
 
 
 
@@ -16,9 +17,9 @@ const  App = () => {
     if (data === undefined) {
       return;
     }
-
     const { lastWinner, scores } = data;
-    const sortedGames = Object.entries(scores).sort(
+    const newScores = populateMissingScores(scores);
+    const sortedGames = Object.entries(newScores).sort(
       (a, b) => (b[1] as number) - (a[1] as number));
     setLastWinner(lastWinner);
     setSortedScores(sortedGames)

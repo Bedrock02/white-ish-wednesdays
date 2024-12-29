@@ -47,11 +47,12 @@ const playerToData = (player: Player) => {
 
 const PersonCard = ({ player, score }: Props) => {
   const { image, alt, name } = playerToData(player);
+  const scoreText = score !== undefined ? `${score}` : '';
   return (
     <div className="personCard">
       <img src={image} alt={alt} height={200} />
       <h2>{name}</h2>
-      {score && <h2>{score}</h2>}
+      {<h2>{scoreText}</h2>}
     </div>
   );
 }
