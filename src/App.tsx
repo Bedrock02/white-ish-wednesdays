@@ -1,27 +1,27 @@
 import './App.css'
 import PersonCard from './components/PersonCard';
 import { useEffect, useState } from 'react';
-import sample from './data/games';
 import { GameSummary, Player } from './types';
 import { populateMissingScores } from './data/people';
-import { getGameData } from './data/neon';
+import dbData from './data/builtTimeData.json'
 
 const  App = () => {
-  const [data, setData] = useState<GameSummary | undefined>(sample);
+  const [data, setData] = useState<GameSummary | undefined>(undefined);
   const [lastWinner, setLastWinner] = useState<Player | undefined>(undefined);
   const [sortedScores, setSortedScores] = useState<[string, number][]>([]);
   
-  const fetchData = async () => {
-    const result = await getGameData();
+  
+  useEffect(() => {  
+    const convertedScores: Record<string, number> = {};
+    Object.entries(dbData.scores).forEach((record) => {
+      convertedScores[record[0] as Player] = record[1] as unknown as number;
+    });
+    
     setData({
-      lastWinner: result.lastWinner.name,
-      scores: result.scores,
-      last_date_modified: result.lastWinner.date_created
+      lastWinner: dbData.lastWinner.name as Player,
+      scores: convertedScores,
+      last_date_modified: dbData.lastWinner.date_created
     })
-  };
-
-  useEffect(() => {
-    fetchData();
   }, []);
 
 

@@ -9,3 +9,7 @@ export interface GameSummary {
   "last_date_modified": string
 }
 
+export interface DBResult {
+  scores: Record<string, number>;
+  lastWinner: Record<string, number>;
+}
