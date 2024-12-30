@@ -70,7 +70,9 @@ const  App = () => {
       <div className="playlist">
         <iframe style={{"borderRadius": "12px"}} src="https://open.spotify.com/embed/playlist/7LYwryDn5nbyLa479Z5mJm?utm_source=generator&theme=0" width="100%" height="500" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
       </div>
-      <footer></footer>
+      <footer className="footer">
+        <h4>Copyright © 2024</h4>
+      </footer>
     </>
   )
 }
