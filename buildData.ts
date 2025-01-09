@@ -11,11 +11,13 @@ async function fetchData(): Promise<{ scores: Record<string, number>, lastWinner
   const scores = await sql`
     SELECT Name, COUNT(*) AS score
     FROM Games
+    WHERE EXTRACT(YEAR FROM date_created) = EXTRACT(YEAR FROM CURRENT_DATE)
     GROUP BY Name
   `;
   const lastGame = await sql`
     SELECT * 
     FROM Games
+    WHERE EXTRACT(YEAR FROM date_created) = EXTRACT(YEAR FROM CURRENT_DATE)
     ORDER BY date_created DESC
     LIMIT 1;
   `;
