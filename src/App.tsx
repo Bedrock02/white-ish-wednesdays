@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { GameSummary, Player } from './types';
 import { populateMissingScores } from './data/people';
 import dbData from './data/builtTimeData.json'
-import { Analytics } from '@vercel/analytics/next'
 
 const  App = () => {
   const [data, setData] = useState<GameSummary | undefined>(undefined);
@@ -44,7 +43,6 @@ const  App = () => {
 
   return (
     <>
-      <Analytics />
       <h1 className="appTitle">White-ish Wednesdays</h1>
       <div>
         <iframe style={{ "borderRadius": "12px"}} src="https://open.spotify.com/embed/episode/36IqZGg6E5JLs5S5dE8Ffb?utm_source=generator" width="100%" height="352" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
