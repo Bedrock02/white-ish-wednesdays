@@ -45,7 +45,7 @@ const  App = () => {
     <>
       <h1 className="appTitle">White-ish Wednesdays</h1>
       <div>
-        <iframe style={{ "borderRadius": "12px"}} src="https://open.spotify.com/embed/episode/3nLUY315rY7cC5h537zf9V?utm_source=generator&t=3045363" width="100%" height="352" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <iframe style={{ "borderRadius": "12px"}} src="https://open.spotify.com/embed/episode/3DHgtQwD53Smc6RKtLDTIi?utm_source=generator&t=2539276" width="100%" height="352" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         <h3 className="caption">
           Join Ebro, Laura, Rosenberg, Shani Kulture & DJ Kast One as they battle to a race of 5 songs they recognized with the help of our phone a FOTS (Friend Of The Show)
         </h3>
