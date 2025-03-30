@@ -5,7 +5,7 @@ import { GameSummary, Player } from './types';
 import { populateMissingScores } from './data/people';
 import dbData from './data/builtTimeData.json'
 
-const SHOW_LINK = "https://open.spotify.com/embed/episode/0O7TCubVMsi1RWKiRVzAXa?utm_source=generator&t=2989700";
+const SHOW_LINK = import.meta.env.VITE_EPISODE_ID;
 
 const  App = () => {
   const [data, setData] = useState<GameSummary | undefined>(undefined);
