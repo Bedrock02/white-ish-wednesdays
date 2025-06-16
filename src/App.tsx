@@ -5,7 +5,7 @@ import { GameSummary, Player } from './types';
 import { populateMissingScores } from './data/people';
 import dbData from './data/builtTimeData.json'
 
-const SHOW_LINK = import.meta.env.VITE_EPISODE_ID;
+const episodeLink_env_var = import.meta.env.VITE_EPISODE_ID;
 
 const  App = () => {
   const [data, setData] = useState<GameSummary | undefined>(undefined);
@@ -22,6 +22,7 @@ const  App = () => {
     setData({
       lastWinner: dbData.lastWinner.name as Player,
       scores: convertedScores,
+      episodeLink: dbData.episodeLink ?? episodeLink_env_var,
       last_date_modified: dbData.lastWinner.date_created
     })
   }, []);
@@ -47,7 +48,7 @@ const  App = () => {
     <>
       <h1 className="appTitle">White-ish Wednesdays</h1>
       <div>
-        <iframe style={{ "borderRadius": "12px"}} src={SHOW_LINK} width="100%" height="352" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <iframe style={{ "borderRadius": "12px"}} src={data.episodeLink} width="100%" height="352" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         <h3 className="caption">
           Join Ebro, Laura, Rosenberg, Shani Kulture & DJ Kast One as they battle to a race of 5 songs they recognized with the help of our phone a FOTS (Friend Of The Show)
         </h3>

@@ -6,7 +6,11 @@ dotenv.config({ path: '.env.local' });
 const DB_URL = process.env.NEON_DATABASE_URL
 
 // Fetch data from the database
-async function fetchData(): Promise<{ scores: Record<string, number>, lastWinner: Record<string, number> }> {
+async function fetchData(): Promise<{ 
+  scores: Record<string, number>,
+  lastWinner: Record<string, number> 
+  episodeLink: string
+}> {
   const sql = neon(DB_URL as string);
   const scores = await sql`
     SELECT Name, COUNT(*) AS score
@@ -22,6 +26,7 @@ async function fetchData(): Promise<{ scores: Record<string, number>, lastWinner
     LIMIT 1;
   `;
   const lastWinner = lastGame[0];
+  const episodeLink = lastWinner.link;
   const latestScores: Record<string, number> = {};
   scores.forEach(game => {
         if (game.name === undefined) {
@@ -30,7 +35,7 @@ async function fetchData(): Promise<{ scores: Record<string, number>, lastWinner
         latestScores[game.name] = game.score;
       });
   
-  return { scores: latestScores, lastWinner };
+  return { scores: latestScores, lastWinner, episodeLink };
 }
 
 // Write data to a file

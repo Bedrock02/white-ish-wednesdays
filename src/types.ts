@@ -6,7 +6,8 @@ export interface GameSummary {
   "scores": {
     [key in Player]?: number
   },
-  "last_date_modified": string
+  "last_date_modified": string,
+  "episodeLink": string
 }
 
 export interface DBResult {
