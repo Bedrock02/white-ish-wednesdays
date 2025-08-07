@@ -8,6 +8,7 @@ import djjuan from '../assets/djjuan.jpeg';
 interface Props {
   player: Player;
   score?: number;
+  icon?: boolean;
 }
 
 const playerToData = (player: Player) => {
@@ -51,13 +52,12 @@ const playerToData = (player: Player) => {
       };
   }
 };
-
-const PersonCard = ({ player, score }: Props) => {
+const PersonCard = ({ player, score, icon }: Props) => {
   const { image, alt, name } = playerToData(player);
   const scoreText = score !== undefined ? `${score}` : '';
   return (
     <div className="personCard">
-      <img src={image} alt={alt} height={200} />
+      <img src={image} alt={alt} height={icon ? 40 : 200} style={{ borderRadius: '10%' }} />
       <h2>{name}</h2>
       {<h2>{scoreText}</h2>}
     </div>

@@ -62,7 +62,6 @@
 }
 
 .lastWinner {
-  border-top: 1px solid #FDB827;
   padding: 20px 20px;
   padding-top: 50px;
   display: flex;
@@ -83,4 +82,75 @@
 
 .lastUpdated {
   color: #FDB827;
+}
+
+.last5GamesTable {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  background: #252525;
+  transition: all 0.3s ease;
+  border: 1px solid #333;
+}
+
+.last5GamesTable:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  border-color: #FDB827;
+}
+
+.last5GamesTable th {
+  background-color: #1a1a1a;
+  color: #FDB827;
+  font-weight: 600;
+  text-align: left;
+  padding: 1rem;
+  border-bottom: 2px solid #FDB827;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+}
+
+.last5GamesTable td {
+  padding: 1rem;
+  border-bottom: 1px solid #333;
+  color: #f0f0f0;
+  transition: all 0.2s ease;
+}
+
+.last5GamesTable tr:last-child td {
+  border-bottom: none;
+}
+
+.last5GamesTable tr:hover td {
+  background-color: rgba(253, 184, 39, 0.1);
+}
+
+.last5GamesTable tbody tr:nth-child(odd) {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.last5GamesTable td:first-child {
+  font-weight: 500;
+  color: #FDB827;
+  border-right: 1px solid #333;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.last5GamesTable {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.summary {
+  border-top: 1px solid #FDB827;
+  display: flex;
+  flex-direction: row;
 }

@@ -7,10 +7,18 @@ export interface GameSummary {
     [key in Player]?: number
   },
   "last_date_modified": string,
-  "episodeLink": string
+  "episodeLink": string,
+  "last5Games": Game[]
 }
 
 export interface DBResult {
   scores: Record<string, number>;
   lastWinner: Record<string, number>;
+}
+
+export interface Game {
+  id: string;
+  name: string;
+  date_created: string;
+  link: string;
 }
