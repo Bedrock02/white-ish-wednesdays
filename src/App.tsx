@@ -7,6 +7,15 @@ import dbData from './data/builtTimeData.json'
 
 const episodeLink_env_var = import.meta.env.VITE_EPISODE_ID;
 
+const findClosestWednesdayInThePast = (givenDate: Date) => {
+  const date = new Date(givenDate);
+  const day = date.getDay();
+  // Calculate days to subtract to get to the previous Wednesday (3 is Wednesday in getDay())
+  const daysToSubtract = (day + 4) % 7;
+  date.setDate(date.getDate() - daysToSubtract);
+  return date.toLocaleDateString();
+}
+
 const  App = () => {
   const [data, setData] = useState<GameSummary | undefined>(undefined);
   const [lastWinner, setLastWinner] = useState<Player | undefined>(undefined);
@@ -83,7 +92,7 @@ const  App = () => {
             {last5Games?.map((game) => (
               <tr key={game.id}>
                 <td><PersonCard icon={true} player={game.name as Player} /></td>
-                <td>{new Date(game.date_created).toLocaleDateString()}</td>
+                <td>{findClosestWednesdayInThePast(new Date(game.date_created))}</td>
               </tr>
             ))}
           </tbody>
