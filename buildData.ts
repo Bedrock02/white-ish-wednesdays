@@ -6,13 +6,14 @@ import { Player } from './src/types';
 dotenv.config({ path: '.env.local' });
 const DB_URL = process.env.NEON_DATABASE_URL
 
-// Fetch data from the database
-async function fetchData(): Promise<{ 
+type DBResult = {
   scores: Record<string, number>,
-  lastWinner: Record<string, number>,
+  lastWinnerModel: Record<string, number>,
   episodeLink: string,
   last5Games: Record<string, number>[]
-}> {
+}
+// Fetch data from the database
+async function fetchData(): Promise<DBResult> {
   const sql = neon(DB_URL as string);
   const scores = await sql`
     SELECT Name, COUNT(*) AS score
@@ -29,7 +30,7 @@ async function fetchData(): Promise<{
     LIMIT 5;
   `;
   const lastGame = last5Games[0];
-  const lastWinner = lastGame;
+  const lastWinnerModel = lastGame;
   const episodeLink = lastGame.link;
   const latestScores: Record<string, number> = {};
   scores.forEach(game => {
@@ -39,13 +40,13 @@ async function fetchData(): Promise<{
         latestScores[game.name] = game.score;
       });
   
-  return { scores: latestScores, lastWinner, episodeLink, last5Games };
+  return { scores: latestScores, lastWinnerModel, episodeLink, last5Games };
 }
 
 // Write data to a file
 function writeToFile(filePath: string, data: { 
   scores: Record<string, number>,
-  lastWinner: string,
+  lastWinnerName: string,
   episodeLink: string,
   last5Games: Record<string, number>[] 
 }): void {
@@ -65,7 +66,7 @@ async function main() {
         const data = await fetchData();
         writeToFile('./src/data/builtTimeData.json', {
           scores: data.scores,
-          lastWinner: (data.lastWinner.name as unknown) as Player,
+          lastWinnerName: (data.lastWinnerModel.name as unknown) as Player,
           episodeLink: data.episodeLink,
           last5Games: data.last5Games
         });

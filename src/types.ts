@@ -2,7 +2,7 @@ export type Player = 'ebro' | 'laura' | 'shani' | 'djkast' | 'djjuan';
 
 
 export interface GameSummary {
-  "lastWinner": Player,
+  "lastWinnerName": Player,
   "scores": {
     [key in Player]?: number
   },

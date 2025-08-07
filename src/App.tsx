@@ -11,35 +11,37 @@ const  App = () => {
   const [data, setData] = useState<GameSummary | undefined>(undefined);
   const [lastWinner, setLastWinner] = useState<Player | undefined>(undefined);
   const [sortedScores, setSortedScores] = useState<[string, number][]>([]);
-  const { lastWinner: dbLastWinner, scores, last5Games, episodeLink, last_date_modified } = data ?? {};
+  const { lastWinnerName, scores, last5Games, episodeLink, last_date_modified } = data ?? {};
   
   
   useEffect(() => {  
     const convertedScores: Record<string, number> = {};
-    Object.entries(dbData.scores).forEach((record) => {
+    const { lastWinnerName, scores, episodeLink, last5Games } = dbData;
+    Object.entries(scores).forEach((record) => {
       convertedScores[record[0] as Player] = record[1] as unknown as number;
     });
-    
     setData({
-      lastWinner: (dbData.lastWinner.name) as Player,
+      lastWinnerName: lastWinnerName as Player,
       scores: convertedScores,
-      episodeLink: dbData.episodeLink ?? episodeLink_env_var,
-      last_date_modified: dbData.lastWinner.date_created as string,
-      last5Games: dbData.last5Games
+      episodeLink: episodeLink ?? episodeLink_env_var,
+      last_date_modified: last_date_modified ?? '',
+      last5Games: last5Games
     })
-  }, []);
+  }, [lastWinnerName, scores, episodeLink, last_date_modified, last5Games]);
 
 
   useEffect(() => {
-    if (scores === undefined) {
+    const {lastWinnerName, scores} = data ?? {};
+    if (lastWinnerName === undefined || scores === undefined) {
       return;
     }
     const newScores = populateMissingScores(scores);
     const sortedGames = Object.entries(newScores).sort(
       (a, b) => (b[1] as number) - (a[1] as number));
-    setLastWinner(dbLastWinner);
+    
+    setLastWinner(lastWinnerName);
     setSortedScores(sortedGames)
-  }, [scores, dbLastWinner]);
+  }, [data]);
 
   if (lastWinner === undefined) {
     return <div>Loading...</div>
