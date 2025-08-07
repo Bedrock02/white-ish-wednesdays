@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import { neon } from '@neondatabase/serverless';
 import * as dotenv from 'dotenv';
+import { Player } from './src/types';
 
 dotenv.config({ path: '.env.local' });
 const DB_URL = process.env.NEON_DATABASE_URL
@@ -42,7 +43,12 @@ async function fetchData(): Promise<{
 }
 
 // Write data to a file
-function writeToFile(filePath: string, data: { scores: Record<string, number>; lastWinner: string; episodeLink: string; }): void {
+function writeToFile(filePath: string, data: { 
+  scores: Record<string, number>,
+  lastWinner: string,
+  episodeLink: string,
+  last5Games: Record<string, number>[] 
+}): void {
     const jsonString = JSON.stringify(data, null, 2);
     fs.writeFile(filePath, jsonString, 'utf8', (err) => {
         if (err) {
@@ -57,7 +63,12 @@ function writeToFile(filePath: string, data: { scores: Record<string, number>; l
 async function main() {
     try {
         const data = await fetchData();
-        writeToFile('./src/data/builtTimeData.json', data);
+        writeToFile('./src/data/builtTimeData.json', {
+          scores: data.scores,
+          lastWinner: (data.lastWinner.name as unknown) as Player,
+          episodeLink: data.episodeLink,
+          last5Games: data.last5Games
+        });
     } catch (error) {
         console.error('Error fetching data:', error);
     }
