@@ -8,8 +8,9 @@ const DB_URL = process.env.NEON_DATABASE_URL
 // Fetch data from the database
 async function fetchData(): Promise<{ 
   scores: Record<string, number>,
-  lastWinner: Record<string, number> 
-  episodeLink: string
+  lastWinner: Record<string, number>,
+  episodeLink: string,
+  last5Games: Record<string, number>[]
 }> {
   const sql = neon(DB_URL as string);
   const scores = await sql`
@@ -18,15 +19,17 @@ async function fetchData(): Promise<{
     WHERE EXTRACT(YEAR FROM date_created) = EXTRACT(YEAR FROM CURRENT_DATE)
     GROUP BY Name
   `;
-  const lastGame = await sql`
+
+  const last5Games = await sql`
     SELECT * 
     FROM Games
     WHERE EXTRACT(YEAR FROM date_created) = EXTRACT(YEAR FROM CURRENT_DATE)
     ORDER BY date_created DESC
-    LIMIT 1;
+    LIMIT 5;
   `;
-  const lastWinner = lastGame[0];
-  const episodeLink = lastWinner.link;
+  const lastGame = last5Games[0];
+  const lastWinner = lastGame;
+  const episodeLink = lastGame.link;
   const latestScores: Record<string, number> = {};
   scores.forEach(game => {
         if (game.name === undefined) {
@@ -35,11 +38,11 @@ async function fetchData(): Promise<{
         latestScores[game.name] = game.score;
       });
   
-  return { scores: latestScores, lastWinner, episodeLink };
+  return { scores: latestScores, lastWinner, episodeLink, last5Games };
 }
 
 // Write data to a file
-function writeToFile(filePath: string, data: { scores: Record<string, number>; lastWinner: Record<string, number>; }): void {
+function writeToFile(filePath: string, data: { scores: Record<string, number>; lastWinner: string; episodeLink: string; }): void {
     const jsonString = JSON.stringify(data, null, 2);
     fs.writeFile(filePath, jsonString, 'utf8', (err) => {
         if (err) {

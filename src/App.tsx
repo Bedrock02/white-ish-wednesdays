@@ -23,7 +23,8 @@ const  App = () => {
       lastWinner: dbData.lastWinner.name as Player,
       scores: convertedScores,
       episodeLink: dbData.episodeLink ?? episodeLink_env_var,
-      last_date_modified: dbData.lastWinner.date_created
+      last_date_modified: dbData.lastWinner.date_created,
+      last5Games: dbData.last5Games
     })
   }, []);
 
@@ -32,7 +33,7 @@ const  App = () => {
     if (data === undefined) {
       return;
     }
-    const { lastWinner, scores } = data;
+    const { lastWinner, scores, last5Games } = data;
     const newScores = populateMissingScores(scores);
     const sortedGames = Object.entries(newScores).sort(
       (a, b) => (b[1] as number) - (a[1] as number));
@@ -56,6 +57,12 @@ const  App = () => {
       <div className="lastWinner">
         <h2>Last Winner</h2>
         <PersonCard player={lastWinner} />
+      </div>
+      <div className="last5Games">
+        <h2>Last 5 Games</h2>
+        {last5Games.map((game) => (
+          <PersonCard key={game.id} player={game.name as Player} score={game.score} />
+        ))}
       </div>
 
       <div className='scoreBoardContainer'>
