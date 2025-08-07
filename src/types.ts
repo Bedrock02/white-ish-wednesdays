@@ -18,7 +18,7 @@ export interface DBResult {
 
 export interface Game {
   id: string;
-  name: Player;
+  name: string;
   date_created: string;
   link: string;
 }
