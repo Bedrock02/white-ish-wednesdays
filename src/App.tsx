@@ -21,10 +21,10 @@ const  App = () => {
     });
     
     setData({
-      lastWinner: dbData.lastWinner.name as Player,
+      lastWinner: (dbData.lastWinner.name) as Player,
       scores: convertedScores,
       episodeLink: dbData.episodeLink ?? episodeLink_env_var,
-      last_date_modified: dbData.lastWinner.date_created,
+      last_date_modified: dbData.lastWinner.date_created as string,
       last5Games: dbData.last5Games
     })
   }, []);
