@@ -23,7 +23,7 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-const players: Player[] = ["ebro", "laura", "shani", "djkast"];
+const players: Player[] = ["ebro", "laura", "shani", "djkast", "rosenberg"];
 
 players.forEach((player, index) => {
     console.log(`${index + 1}. ${player}`);

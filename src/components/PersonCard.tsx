@@ -4,6 +4,7 @@ import laura from '../assets/lauraStyles.png';
 import djkast from '../assets/djkast.png';
 import shani from '../assets/shani.png';
 import djjuan from '../assets/djjuan.jpeg';
+import rosenberg from '../assets/rosenberg.png';
 
 interface Props {
   player: Player;
@@ -43,6 +44,12 @@ const playerToData = (player: Player) => {
         image: djjuan,
         alt: 'DJ Juan',
         name: 'DJ Juan'
+      }
+    case 'rosenberg':
+      return {
+        image: rosenberg,
+        alt: 'Peter Rosenberg',
+        name: 'Peter Rosenberg'
       }
     default:
       return {

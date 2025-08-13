@@ -6,6 +6,7 @@ const playerIdToName: { [key in Player]: string } = {
   'shani': 'Shani Kulture',
   'djkast': 'DJ Kast One',
   'djjuan': 'DJ Juan',
+  'rosenberg': 'Peter Rosenberg',
 }
 
 const populateMissingScores = (scores: Record<string, number>) => {

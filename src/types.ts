@@ -1,4 +1,4 @@
-export type Player = 'ebro' | 'laura' | 'shani' | 'djkast' | 'djjuan';
+export type Player = 'ebro' | 'laura' | 'shani' | 'djkast' | 'djjuan' | 'rosenberg';
 
 
 export interface GameSummary {
